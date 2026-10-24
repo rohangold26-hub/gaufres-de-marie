@@ -325,8 +325,8 @@
   let coState = { payment: "wave", type: "takeaway", view: "cart", deposit: false, when: "asap", plannedDate: "", plannedSlot: "", calMonth: 0 };
   // available pickup/delivery time slots (11:00 → 18:00, every 30 min)
   const timeSlots = () => { const out = []; for (let h = 11; h <= 18; h++) { out.push((h < 10 ? "0" : "") + h + ":00"); if (h < 18) out.push((h < 10 ? "0" : "") + h + ":30"); } return out; };
-  function openDrawer() { $("#cartDrawer").classList.add("open"); document.body.style.overflow = "hidden"; }
-  function closeDrawer() { $("#cartDrawer").classList.remove("open"); document.body.style.overflow = ""; }
+  function openDrawer() { $("#cartDrawer").classList.add("open"); document.body.classList.add("overlay-open"); document.body.style.overflow = "hidden"; }
+  function closeDrawer() { $("#cartDrawer").classList.remove("open"); document.body.classList.remove("overlay-open"); document.body.style.overflow = ""; }
   function openCart() { coState.view = "cart"; renderDrawer(); openDrawer(); }
 
   function renderDrawer() {
@@ -554,8 +554,8 @@
   }
 
   // ---------- modals (booking still uses a centered modal) ----------
-  function openModal(m) { m.classList.add("open"); document.body.style.overflow = "hidden"; }
-  function closeModal(m) { m.classList.remove("open"); document.body.style.overflow = ""; }
+  function openModal(m) { m.classList.add("open"); document.body.classList.add("overlay-open"); document.body.style.overflow = "hidden"; }
+  function closeModal(m) { m.classList.remove("open"); document.body.classList.remove("overlay-open"); document.body.style.overflow = ""; }
   $$(".modal-backdrop").forEach(bd => { bd.addEventListener("click", e => { if (e.target === bd) closeModal(bd); }); });
   $$(".modal-close").forEach(b => b.addEventListener("click", () => closeModal(b.closest(".modal-backdrop"))));
   document.addEventListener("DOMContentLoaded", () => {
@@ -568,10 +568,13 @@
     const nav = $("#nav");
     addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 40));
     const toggle = $("#navToggle"), menu = $("#navMenu");
-    toggle.onclick = () => { toggle.classList.toggle("open"); menu.classList.toggle("open"); };
-    $$("a.link", menu).forEach(a => a.onclick = () => { toggle.classList.remove("open"); menu.classList.remove("open"); });
+    const closeMenu = () => { toggle.classList.remove("open"); menu.classList.remove("open"); };
+    toggle.onclick = e => { e.stopPropagation(); toggle.classList.toggle("open"); menu.classList.toggle("open"); };
+    $$("a.link", menu).forEach(a => a.onclick = closeMenu);
+    // tap anywhere outside the open menu (the main screen) closes it
+    document.addEventListener("click", e => { if (menu.classList.contains("open") && !menu.contains(e.target) && !toggle.contains(e.target)) closeMenu(); });
     $("#cartBtn").onclick = openCart;
-    $("#langBtn").onclick = () => LGM.setLang(L() === "fr" ? "en" : "fr");
+    $("#langBtn").onclick = () => { LGM.setLang(L() === "fr" ? "en" : "fr"); closeMenu(); };
     $$("#checkoutBtn,#checkoutBtn2").forEach(b => b && (b.onclick = openCart));
     $$("#bookBtn,#bookBtn2").forEach(b => b && (b.onclick = openBooking));
     const cb = $("#clearCartBtn"); if (cb) cb.onclick = clearCart;

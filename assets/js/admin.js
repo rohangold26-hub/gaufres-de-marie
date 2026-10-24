@@ -193,7 +193,9 @@
     $$(".navlink[data-view]").forEach(b => b.onclick = () => showView(b.dataset.view));
     $("#logoutBtn").onclick = () => { sessionStorage.removeItem(PASS_KEY); location.reload(); };
     $("#langBtn").onclick = () => { LGM.setLang(L() === "fr" ? "en" : "fr"); render(); };
-    $("#menuBtn") && ($("#menuBtn").onclick = () => $(".side").classList.toggle("open"));
+    $("#menuBtn") && ($("#menuBtn").onclick = e => { e.stopPropagation(); $(".side").classList.toggle("open"); });
+    // tap the main area to close the open sidebar on mobile
+    document.addEventListener("click", e => { const s = $(".side"); if (s && s.classList.contains("open") && !s.contains(e.target) && !(e.target.closest && e.target.closest("#menuBtn"))) s.classList.remove("open"); });
     $$(".range-seg button").forEach(b => b.onclick = () => { period = b.dataset.p; $$(".range-seg button").forEach(x => x.classList.toggle("on", x === b)); render(); });
     $("#recordSale") && ($("#recordSale").onclick = openSale);
     $("#saleClose") && ($("#saleClose").onclick = () => $("#saleModal").classList.remove("open"));

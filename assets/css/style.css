@@ -55,6 +55,8 @@ header.nav.scrolled{background:rgba(58,26,6,.85);backdrop-filter:blur(10px);padd
 .nav .nav-cta{background:var(--gold);color:var(--chocolate);padding:10px 18px;border-radius:100px;font-weight:600;font-size:.9rem;box-shadow:0 8px 22px -10px rgba(0,0,0,.6);transition:.25s;cursor:pointer;border:0}
 .nav .nav-cta:hover{transform:translateY(-2px);background:#e8ad63}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav #navMenu{margin-left:auto}
 
 main{position:relative;z-index:10}
 
@@ -285,7 +287,9 @@ footer{background:#2a1304;color:var(--cream);padding:56px clamp(20px,5vw,40px) 3
 /* ===== Slide-out drawer (cart + checkout) ===== */
 .drawer-backdrop{position:fixed;inset:0;z-index:120;background:rgba(8,6,4,.55);backdrop-filter:blur(3px);display:none;justify-content:flex-end}
 .drawer-backdrop.open{display:flex}
-.drawer{width:min(430px,100vw);height:100vh;max-height:100vh;background:linear-gradient(165deg,#3A1A06 0%,#2a1304 60%,#3a1a06 100%);color:var(--cream);display:flex;flex-direction:column;box-shadow:-30px 0 80px -20px rgba(0,0,0,.7);transform:translateX(100%);animation:drawerIn .4s cubic-bezier(.2,.8,.2,1) forwards;border-left:3px solid var(--coral)}
+.drawer{width:min(430px,92vw);height:100vh;max-height:100vh;background:linear-gradient(165deg,#3A1A06 0%,#2a1304 60%,#3a1a06 100%);color:var(--cream);display:flex;flex-direction:column;box-shadow:-30px 0 80px -20px rgba(0,0,0,.7);transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.8,.2,1);border-left:3px solid var(--coral)}
+.drawer-backdrop.open .drawer{transform:translateX(0)}
+.overlay-open .chat-widget{display:none}
 /* stylish custom scrollbar inside the drawer */
 .drawer-body{scrollbar-width:thin;scrollbar-color:rgba(232,57,74,.6) transparent}
 .drawer-body::-webkit-scrollbar{width:8px}
@@ -527,10 +531,16 @@ body.acc-page{background:var(--cream)}
 @media (max-width:880px){
   .about-grid,.order-grid{grid-template-columns:1fr}
   .nav .brand .wordmark{display:none}
-  .nav nav{position:fixed;inset:0 0 0 auto;width:min(80vw,330px);flex-direction:column;justify-content:center;gap:22px;background:rgba(58,26,6,.97);backdrop-filter:blur(12px);transform:translateX(100%);transition:transform .35s;padding:40px}
-  .nav nav.open{transform:none}
-  .nav nav a.link{font-size:1.2rem}
-  .nav-toggle{display:block;z-index:60}
+  .nav #navMenu{position:fixed;inset:0 0 0 auto;margin:0;width:min(82vw,320px);flex-direction:column;justify-content:center;align-items:center;gap:22px;background:rgba(58,26,6,.97);backdrop-filter:blur(12px);transform:translateX(100%);transition:transform .35s;padding:72px 32px 40px;overflow-y:auto}
+  .nav #navMenu.open{transform:none}
+  .nav #navMenu a.link{font-size:1.2rem}
+  .nav #navMenu .nav-cta{margin-top:6px}
+  .nav-right{gap:8px}
+  .nav-toggle{display:block;z-index:120;position:relative}
+  /* account/employee sub-page nav: drop the secondary links so the row fits */
+  .acc-page .nav #navMenu .link, .emp-page .nav #navMenu .link{display:none}
+  .acc-page .nav #navMenu, .emp-page .nav #navMenu{gap:10px}
+  .acc-page .nav{padding:12px 16px}
   .nav-toggle span{display:block;width:26px;height:2px;background:var(--cream);margin:6px 0;transition:.3s}
   .nav-toggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
   .nav-toggle.open span:nth-child(2){opacity:0}

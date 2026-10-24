@@ -323,4 +323,8 @@ tr.row-planned td:first-child{box-shadow:inset 3px 0 0 #7b5cff}
   .mobile-top b{font-family:'Caveat';font-size:1.3rem}
   .kpis{grid-template-columns:1fr 1fr}.two,.three{grid-template-columns:1fr}
   .sched-row{grid-template-columns:1fr 1fr;}.row2{grid-template-columns:1fr}
+  .top-actions{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start}
+  .range-seg{flex:0 0 auto}
+  .range-seg button{padding:8px 12px;font-size:.8rem;white-space:nowrap}
+  .amodal-card{width:94vw;max-width:94vw}
 }

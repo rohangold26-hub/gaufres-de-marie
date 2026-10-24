@@ -41,20 +41,20 @@
 <!-- nav -->
 <header class="nav" id="nav">
   <a href="#top" class="brand"><span class="logo-glass"><svg class="logo-badge"><use href="#lgmLogo"/></svg></span><span class="wordmark">Les Gaufres de Marie</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
   <nav id="navMenu">
     <a class="link" href="#menu" data-i18n="nav.menu">Le Menu</a>
     <a class="link" href="#about" data-i18n="nav.about">L'Histoire</a>
     <a class="link" href="#truck" data-i18n="nav.truck">Le Food Truck</a>
     <a class="link" href="#events" data-i18n="book.kicker">Événements</a>
-    <div class="nav-actions">
-      <button class="icon-btn lang-btn" id="langBtn">EN</button>
-      <div id="notifMount"></div>
-      <a class="icon-btn" id="accountBtn" href="account.html" title="Compte">👤<span id="accBadgeNav" style="position:absolute;top:-6px;right:-6px;font-size:.8rem"></span></a>
-      <button class="icon-btn" id="cartBtn" title="Panier">🛒<span class="cart-count" id="cartCount">0</span></button>
-      <a class="nav-cta" id="signInBtn" href="account.html" data-i18n="nav.signin">Se connecter</a>
-    </div>
+    <button class="icon-btn lang-btn" id="langBtn">EN</button>
+    <a class="nav-cta" id="signInBtn" href="account.html" data-i18n="nav.signin">Se connecter</a>
   </nav>
+  <div class="nav-right">
+    <div id="notifMount"></div>
+    <a class="icon-btn" id="accountBtn" href="account.html" title="Compte">👤<span id="accBadgeNav" style="position:absolute;top:-6px;right:-6px;font-size:.8rem"></span></a>
+    <button class="icon-btn" id="cartBtn" title="Panier">🛒<span class="cart-count" id="cartCount">0</span></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </header>
 
 <main id="top">
