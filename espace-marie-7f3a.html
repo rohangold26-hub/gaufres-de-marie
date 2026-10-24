@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Espace Marie — Les Gaufres de Marie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Permanent+Marker&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/admin.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+</head>
+<body>
+
+<!-- reusable logo -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lgmLogo" viewBox="0 0 220 220">
+    <circle cx="110" cy="110" r="109" fill="#E8394A"/>
+    <text x="110" y="86" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">LES GAUFRES</text>
+    <text x="110" y="124" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">DE MARIE</text>
+    <g transform="translate(110 152)">
+      <clipPath id="lgmHeartClip"><path d="M0 8 C0 -4 -17 -6 -17 7 C-17 19 -3 25 0 30 C3 25 17 19 17 7 C17 -6 0 -4 0 8 Z"/></clipPath>
+      <g clip-path="url(#lgmHeartClip)" stroke="#FFF8F0" stroke-width="2.1">
+        <line x1="-20" y1="-8" x2="-20" y2="34"/><line x1="-12" y1="-8" x2="-12" y2="34"/><line x1="-4" y1="-8" x2="-4" y2="34"/><line x1="4" y1="-8" x2="4" y2="34"/><line x1="12" y1="-8" x2="12" y2="34"/><line x1="20" y1="-8" x2="20" y2="34"/>
+        <line x1="-22" y1="-2" x2="22" y2="-2"/><line x1="-22" y1="6" x2="22" y2="6"/><line x1="-22" y1="14" x2="22" y2="14"/><line x1="-22" y1="22" x2="22" y2="22"/>
+      </g>
+      <path d="M0 8 C0 -4 -17 -6 -17 7 C-17 19 -3 25 0 30 C3 25 17 19 17 7 C17 -6 0 -4 0 8 Z" fill="none" stroke="#FFF8F0" stroke-width="3"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- login gate -->
+<div id="gate">
+  <div class="box">
+    <svg class="logo" viewBox="0 0 220 220"><use href="#lgmLogo"/></svg>
+    <h1>Espace Marie</h1>
+    <p>Les Gaufres de Marie · Administration</p>
+    <input id="gateUser" type="text" placeholder="Identifiant" autocomplete="username" />
+    <input id="gatePass" type="password" placeholder="Mot de passe" autocomplete="current-password" />
+    <button id="gateBtn">Entrer →</button>
+    <div id="gateErr" style="color:var(--coral);font-size:.82rem;min-height:16px;margin-top:8px;font-weight:600"></div>
+    <div class="hint">Démo : identifiant <b>marie</b> · mot de passe <b>gaufre2025</b><br>(à changer en production)</div>
+  </div>
+</div>
+
+<div class="mobile-top">
+  <button id="menuBtn" style="background:none;border:0;color:#fff;font-size:1.4rem">☰</button>
+  <b>Les Gaufres de Marie</b>
+  <button id="langBtnM" style="background:none;border:0;color:#fff;font-weight:700"></button>
+</div>
+
+<div class="app">
+  <!-- sidebar -->
+  <aside class="side">
+    <div class="brand"><svg class="logo" viewBox="0 0 220 220"><use href="#lgmLogo"/></svg>
+      <div><b>Les Gaufres<br>de Marie</b><small>ESPACE ADMIN</small></div></div>
+    <button class="navlink active" data-view="dash"><span class="ic">📊</span><span class="lbl">Tableau de bord</span></button>
+    <button class="navlink" data-view="orders"><span class="ic">🧾</span><span class="lbl">Commandes</span></button>
+    <button class="navlink" data-view="clients"><span class="ic">👥</span><span class="lbl">Clients</span></button>
+    <button class="navlink" data-view="stock"><span class="ic">📦</span><span class="lbl">Stock</span></button>
+    <button class="navlink" data-view="bookings"><span class="ic">📅</span><span class="lbl">Réservations</span></button>
+    <button class="navlink" data-view="finances"><span class="ic">💰</span><span class="lbl">Finances</span></button>
+    <button class="navlink" data-view="satisfaction"><span class="ic">⭐</span><span class="lbl">Satisfaction</span></button>
+    <button class="navlink" data-view="truck"><span class="ic">🚚</span><span class="lbl">Trouver le truck</span></button>
+    <button class="navlink" data-view="highlights"><span class="ic">📸</span><span class="lbl">Actus</span></button>
+    <button class="navlink" data-view="photos"><span class="ic">🖼️</span><span class="lbl">Photos menu</span></button>
+    <button class="navlink" data-view="team"><span class="ic">👔</span><span class="lbl">Équipe</span></button>
+    <button class="navlink" data-view="prep"><span class="ic">⏱️</span><span class="lbl">Temps de prép.</span></button>
+    <button class="navlink" data-view="events"><span class="ic">🎪</span><span class="lbl">Événements</span></button>
+    <button class="navlink" data-view="settings"><span class="ic">⚙️</span><span class="lbl">Réseaux & Paiements</span></button>
+    <div class="spacer"></div>
+    <div class="sidefoot">
+      <button class="navlink" id="langBtn">🌐 <span>EN</span></button>
+      <a class="navlink" id="viewSiteBtn" href="index.html" target="_blank">🔗 Voir le site</a>
+      <button class="navlink" id="logoutBtn">🚪 Déconnexion</button>
+    </div>
+  </aside>
+
+  <!-- main -->
+  <main class="main">
+    <div class="topbar">
+      <div><h2 id="viewTitle">Tableau de bord</h2><div class="sub" id="welcomeMsg">Bonjour Marie 👋</div></div>
+      <div class="top-actions">
+        <div id="notifMount"></div>
+        <div class="seg range-seg">
+          <button data-p="day">Jour</button>
+          <button data-p="week">Semaine</button>
+          <button data-p="month" class="on">Mois</button>
+          <button data-p="quarter">Trimestre</button>
+          <button data-p="year">Année</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section class="view active" id="view-dash">
+      <div class="grid kpis" id="kpis" style="margin-bottom:16px"></div>
+      <div class="grid two" style="margin-bottom:16px">
+        <div class="card"><h3 id="t-revTrend"></h3><div class="chart-wrap"><canvas id="chRev"></canvas></div></div>
+        <div class="card"><h3 id="t-byLoc"></h3><div class="chart-sm"><canvas id="chLoc"></canvas></div></div>
+      </div>
+      <div class="grid two" style="margin-bottom:16px">
+        <div class="card"><h3 id="t-recent"></h3><div id="dashOrders"></div></div>
+        <div>
+          <div class="card" style="margin-bottom:16px"><h3 id="t-topP"></h3><div id="topProducts"></div></div>
+          <div class="card"><h3 id="t-payMix"></h3><div class="chart-sm" style="height:170px"><canvas id="chPay"></canvas></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section class="view" id="view-orders">
+      <div class="card" id="closedToggleCard" style="margin-bottom:16px"></div>
+      <div class="card" id="orderAccept" style="margin-bottom:16px"></div>
+      <div class="card" id="orderBoard" style="margin-bottom:16px"></div>
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input class="search" id="orderSearch" />
+            <select class="sel" id="orderStatusFilter"></select>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn choc sm" id="recordSale">＋ Vente espèces / TPE</button>
+            <button class="btn coral sm" id="exportOrders">⬇ Export CSV</button>
+          </div>
+        </div>
+      </div>
+      <div class="card"><div id="ordersTable"></div></div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="view" id="view-clients">
+      <div class="grid two" style="margin-bottom:16px">
+        <div class="card">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+            <input class="search" id="custSearch" />
+            <select class="sel" id="custSort">
+              <option value="lifetime">💰 Dépensé</option><option value="orders">🧾 Commandes</option><option value="recent">🆕 Récents</option>
+            </select>
+          </div>
+          <div id="custTable" style="max-height:520px;overflow:auto"></div>
+        </div>
+        <div class="card"><h3>🏅 Badges</h3><div class="chart-sm"><canvas id="chBadges"></canvas></div>
+          <p class="sub" style="margin-top:14px;color:var(--muted);font-size:.82rem">🌱 Nouveau · 🥉 Bronze · 🥈 Argent · 🥇 Or · 💎 VIP — calculé sur le total dépensé.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINANCES -->
+    <section class="view" id="view-finances">
+      <div class="grid kpis" id="finKpis" style="margin-bottom:16px"></div>
+      <div class="grid two">
+        <div class="card"><h3 id="t-finRev"></h3><div class="chart-wrap"><canvas id="chFinRev"></canvas></div></div>
+        <div class="card"><h3 id="t-finPay"></h3><div class="chart-sm"><canvas id="chFinPay"></canvas></div><p class="sub" id="finNote" style="margin-top:12px;color:var(--muted);font-size:.8rem"></p></div>
+      </div>
+      <div class="card" id="budgetCard" style="margin-top:16px"></div>
+    </section>
+
+    <!-- SATISFACTION -->
+    <section class="view" id="view-satisfaction">
+      <div class="grid kpis" id="satKpis" style="margin-bottom:16px"></div>
+      <div class="grid two">
+        <div class="card"><h3 id="t-satDist"></h3><div class="chart-wrap"><canvas id="chSat"></canvas></div></div>
+        <div class="card"><h3 id="t-reviews"></h3><div id="satReviews" style="max-height:340px;overflow:auto"></div></div>
+      </div>
+    </section>
+
+    <!-- TRUCK -->
+    <section class="view" id="view-truck">
+      <div class="card" style="margin-bottom:16px">
+        <h3 id="autoTitle"></h3>
+        <p class="sub" id="autoDesc" style="color:var(--muted);margin-bottom:14px"></p>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <button class="toggle" id="autoToggle"></button><b id="autoLabel"></b>
+        </div>
+        <div class="field"><textarea id="weekNote" rows="2"></textarea></div>
+      </div>
+      <div class="card">
+        <div class="sched-row" id="schedHead" style="background:none;border:0;font-size:.74rem;text-transform:uppercase;color:var(--muted);font-weight:700;padding:0 10px 6px"></div>
+        <div id="schedRows"></div>
+        <div style="display:flex;gap:10px;margin-top:12px">
+          <button class="btn ghost" id="addSched"></button>
+          <button class="btn coral" id="saveSched"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="view" id="view-events">
+      <div class="card">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn coral sm" id="addEvent"></button></div>
+        <div id="eventsTable"></div>
+      </div>
+    </section>
+
+    <!-- STOCK -->
+    <section class="view" id="view-stock">
+      <div class="card" id="agentCard" style="margin-bottom:16px"></div>
+      <div class="card"><div id="stockTable"></div></div>
+    </section>
+
+    <!-- BOOKINGS / quotes -->
+    <section class="view" id="view-bookings">
+      <div class="card"><div id="bookingsTable"></div></div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section class="view" id="view-highlights">
+      <div class="card" style="margin-bottom:16px">
+        <h3 id="hlAdminTitle"></h3>
+        <p class="sub" id="hlAdminDesc" style="color:var(--muted);margin-bottom:14px"></p>
+        <div class="row2">
+          <div class="field"><label id="hlTitleFrLbl">Titre de section (FR)</label><input id="hlTitleFr"></div>
+          <div class="field"><label id="hlTitleEnLbl">Section title (EN)</label><input id="hlTitleEn"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div id="hlGrid" class="grid three"></div>
+        <button class="btn coral sm" id="hlAdd" style="margin-top:14px">＋</button>
+      </div>
+    </section>
+
+    <!-- PREP TIME -->
+    <section class="view" id="view-prep">
+      <div class="card" id="prepBar" style="margin-bottom:16px"></div>
+      <div class="card">
+        <h3 id="prepTitle2"></h3>
+        <p class="sub" id="prepDesc2" style="color:var(--muted);margin-bottom:14px"></p>
+        <div id="prepTable" style="overflow:auto"></div>
+      </div>
+    </section>
+
+    <!-- MENU PHOTOS -->
+    <section class="view" id="view-photos">
+      <div class="card" style="margin-bottom:16px">
+        <h3 id="photoTitle"></h3>
+        <p class="sub" id="photoDesc" style="color:var(--muted)"></p>
+      </div>
+      <div class="card"><div id="photoGrid" class="photo-grid"></div></div>
+    </section>
+
+    <!-- TEAM / HR -->
+    <section class="view" id="view-team">
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap" id="empBar"></div>
+        <div class="agent-note" style="margin-top:12px"><b>🤖 <span id="empAgentTitle"></span></b><span id="empAgentDesc" class="muted"></span></div>
+      </div>
+      <div class="card"><div id="empGrid" class="emp-grid"></div></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="view-settings">
+      <div class="grid two">
+        <div class="card"><h3 id="socialsTitle"></h3><p class="sub" id="socialsDesc" style="color:var(--muted);margin-bottom:14px"></p><div id="socialsBox"></div></div>
+        <div class="card"><h3 id="payTitle"></h3><p class="sub" id="payDesc" style="color:var(--muted);margin-bottom:14px"></p><div id="payBox"></div></div>
+      </div>
+      <div class="card" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div><b>Données de démo</b><div class="sub" style="color:var(--muted)">Réinitialise les commandes/clients de démonstration.</div></div>
+        <button class="btn ghost" id="resetData">♻️ Reset</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- record sale / highlight edit modal -->
+<div class="amodal" id="saleModal"><div class="amodal-card">
+  <div class="amodal-head"><b id="saleTitle">Enregistrer une vente</b><button class="amodal-x" id="saleClose">✕</button></div>
+  <div class="amodal-body" id="saleBody"></div>
+</div></div>
+
+<div class="amodal" id="creditModal"><div class="amodal-card">
+  <div class="amodal-head"><b id="creditTitle">Accorder un crédit</b><button class="amodal-x" id="creditClose">✕</button></div>
+  <div class="amodal-body" id="creditBody"></div>
+</div></div>
+
+<div class="amodal" id="empModal"><div class="amodal-card wide">
+  <div class="amodal-head"><b id="empModalTitle">Fiche employé</b><button class="amodal-x" id="empClose">✕</button></div>
+  <div class="amodal-body" id="empBody"></div>
+</div></div>
+
+<!-- deposit / settle (two-stage payment) modal -->
+<div class="amodal" id="settleModal"><div class="amodal-card">
+  <div class="amodal-head"><b id="settleTitle">Encaisser &amp; consolider</b><button class="amodal-x" id="settleClose">✕</button></div>
+  <div class="amodal-body" id="settleBody"></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/notif.js"></script>
+<script src="assets/js/dishart.js"></script>
+<script src="assets/js/admin.js"></script>
+<script>
+  // localized static chart titles + mobile lang button mirror
+  (function () {
+    const setT = () => {
+      const en = LGM.lang === "en";
+      const map = {
+        "t-revTrend": en ? "Revenue trend" : "Évolution du chiffre d'affaires",
+        "t-byLoc": en ? "Revenue by location" : "CA par emplacement",
+        "t-recent": en ? "Recent orders" : "Commandes récentes",
+        "t-topP": en ? "Top products" : "Top produits",
+        "t-payMix": en ? "Payment methods" : "Moyens de paiement",
+        "t-finRev": en ? "Revenue & margin" : "CA & marge",
+        "t-finPay": en ? "Revenue by method" : "CA par moyen de paiement",
+        "t-satDist": en ? "Rating distribution" : "Répartition des notes",
+        "t-reviews": en ? "Latest reviews" : "Derniers avis"
+      };
+      for (const k in map) { const el = document.getElementById(k); if (el) el.textContent = map[k]; }
+    };
+    LGM.onLang(setT); document.addEventListener("DOMContentLoaded", setT);
+    const mb = document.getElementById("langBtnM");
+    if (mb) { const sync = () => mb.textContent = LGM.t("lang.toggle"); LGM.onLang(sync); document.addEventListener("DOMContentLoaded", sync); mb.onclick = () => document.getElementById("langBtn").click(); }
+  })();
+</script>
+</body>
+</html>

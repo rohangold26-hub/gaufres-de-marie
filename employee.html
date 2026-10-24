@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Espace employé — Les Gaufres de Marie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Permanent+Marker&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+  body.emp-portal{background:var(--cream)}
+  .ep-hero{background:linear-gradient(150deg,var(--chocolate),#22130a);color:var(--cream);padding:90px clamp(20px,5vw,40px) 70px;text-align:center}
+  .ep-wrap{max-width:760px;margin:-46px auto 0;padding:0 16px 80px;position:relative;z-index:5}
+  .ep-card{background:#fff;border-radius:22px;box-shadow:0 30px 70px -30px rgba(58,26,6,.4);border:1px solid var(--cream-2);overflow:hidden}
+  .ep-head{display:flex;gap:18px;align-items:center;padding:26px clamp(18px,4vw,32px);background:linear-gradient(120deg,var(--cream),var(--cream-2))}
+  .ep-ava{width:96px;height:96px;border-radius:24px;background:var(--coral);color:#fff;display:grid;place-items:center;font-size:2rem;font-weight:800;overflow:hidden;flex:0 0 auto;position:relative}
+  .ep-ava img{width:100%;height:100%;object-fit:cover}
+  .ep-ava .cam{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;cursor:pointer;font-size:.95rem}
+  .ep-who b{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--chocolate);display:block}
+  .ep-who .role{color:var(--coral);font-weight:700}
+  .ep-who small{color:#8a6c54;display:block;margin-top:3px}
+  .ep-body{padding:24px clamp(18px,4vw,32px) 32px}
+  .ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
+  .ep-field{background:var(--cream);border:1px solid var(--cream-2);border-radius:12px;padding:11px 14px}
+  .ep-field .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:#9a8472;font-weight:700}
+  .ep-field .v{color:var(--chocolate);font-weight:600;margin-top:2px}
+  .ep-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--chocolate);margin:24px 0 12px}
+  .ep-doc{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--cream-2)}
+  .ep-doc a{color:var(--coral);font-weight:700}
+  .ep-doc .miss{color:#b9a48f;font-size:.85rem}
+  .ep-pay{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--cream-2)}
+  .ep-pay b{color:var(--chocolate)}
+  .ep-note{background:rgba(217,154,78,.14);border:1px dashed rgba(217,154,78,.5);border-radius:12px;padding:12px 14px;font-size:.85rem;color:#7a5a18;margin-top:18px}
+  .ep-bad{max-width:420px;margin:16vh auto;text-align:center;background:#fff;border-radius:20px;padding:40px 28px;box-shadow:var(--shadow)}
+</style>
+</head>
+<body class="emp-portal">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lgmLogo" viewBox="0 0 220 220"><circle cx="110" cy="110" r="109" fill="#E8394A"/>
+    <text x="110" y="86" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">LES GAUFRES</text>
+    <text x="110" y="124" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">DE MARIE</text></symbol>
+</svg>
+<main id="epRoot"></main>
+<div class="toast" id="toast"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/employee.js"></script>
+</body>
+</html>

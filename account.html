@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mon compte — Les Gaufres de Marie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900&family=Inter:wght@300;400;500;600;700&family=Permanent+Marker&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="acc-page">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lgmLogo" viewBox="0 0 220 220">
+    <circle cx="110" cy="110" r="109" fill="#E8394A"/>
+    <text x="110" y="86" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">LES GAUFRES</text>
+    <text x="110" y="124" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">DE MARIE</text>
+    <g transform="translate(110 152)">
+      <clipPath id="lgmHeartClip"><path d="M0 8 C0 -4 -17 -6 -17 7 C-17 19 -3 25 0 30 C3 25 17 19 17 7 C17 -6 0 -4 0 8 Z"/></clipPath>
+      <g clip-path="url(#lgmHeartClip)" stroke="#FFF8F0" stroke-width="2.1">
+        <line x1="-20" y1="-8" x2="-20" y2="34"/><line x1="-12" y1="-8" x2="-12" y2="34"/><line x1="-4" y1="-8" x2="-4" y2="34"/><line x1="4" y1="-8" x2="4" y2="34"/><line x1="12" y1="-8" x2="12" y2="34"/><line x1="20" y1="-8" x2="20" y2="34"/>
+        <line x1="-22" y1="-2" x2="22" y2="-2"/><line x1="-22" y1="6" x2="22" y2="6"/><line x1="-22" y1="14" x2="22" y2="14"/><line x1="-22" y1="22" x2="22" y2="22"/>
+      </g>
+      <path d="M0 8 C0 -4 -17 -6 -17 7 C-17 19 -3 25 0 30 C3 25 17 19 17 7 C17 -6 0 -4 0 8 Z" fill="none" stroke="#FFF8F0" stroke-width="3"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="nav scrolled" id="nav" style="position:sticky">
+  <a href="index.html" class="brand"><span class="logo-glass"><svg class="logo-badge"><use href="#lgmLogo"/></svg></span><span class="wordmark">Les Gaufres de Marie</span></a>
+  <nav id="navMenu" style="position:static;transform:none;background:none;width:auto;flex-direction:row;padding:0">
+    <a class="link" href="index.html#menu" data-i18n="nav.menu">Le Menu</a>
+    <a class="link" href="index.html#truck" data-i18n="nav.truck">Le Food Truck</a>
+    <div class="nav-actions">
+      <button class="icon-btn lang-btn" id="langBtn">EN</button>
+      <div id="notifMount"></div>
+      <a class="nav-cta" href="index.html#menu" data-i18n="acc.order">Commander</a>
+    </div>
+  </nav>
+</header>
+
+<main id="accRoot"></main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <svg class="logo-badge" style="width:56px;height:56px;flex-basis:56px"><use href="#lgmLogo"/></svg>
+      <div><div class="wordmark">Les Gaufres de Marie</div><div class="sub" data-i18n="foot.sub"></div></div>
+    </div>
+    <div class="socials" id="footSocials"></div>
+  </div>
+  <div class="copyright">© <span id="year">2026</span> Les Gaufres de Marie · <span data-i18n="foot.rights"></span></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/notif.js"></script>
+<script src="assets/js/account.js"></script>
+</body>
+</html>

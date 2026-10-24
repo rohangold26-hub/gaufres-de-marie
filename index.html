@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Les Gaufres de Marie — Gaufres belges artisanales · Abidjan</title>
+<meta name="description" content="Les Gaufres de Marie — foodtruck gourmand & fait maison à Abidjan. Bruxelloises, Liégeoises, bowls & box. Commandez en ligne." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=Permanent+Marker&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- reusable logo -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lgmLogo" viewBox="0 0 220 220">
+    <circle cx="110" cy="110" r="109" fill="#E8394A"/>
+    <text x="110" y="86" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">LES GAUFRES</text>
+    <text x="110" y="124" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="30" fill="#FFF8F0">DE MARIE</text>
+    <g transform="translate(110 152)">
+      <clipPath id="lgmHeartClip"><path d="M0 8 C0 -4 -17 -6 -17 7 C-17 19 -3 25 0 30 C3 25 17 19 17 7 C17 -6 0 -4 0 8 Z"/></clipPath>
+      <g clip-path="url(#lgmHeartClip)" stroke="#FFF8F0" stroke-width="2.1">
+        <line x1="-20" y1="-8" x2="-20" y2="34"/><line x1="-12" y1="-8" x2="-12" y2="34"/><line x1="-4" y1="-8" x2="-4" y2="34"/><line x1="4" y1="-8" x2="4" y2="34"/><line x1="12" y1="-8" x2="12" y2="34"/><line x1="20" y1="-8" x2="20" y2="34"/>
+        <line x1="-22" y1="-2" x2="22" y2="-2"/><line x1="-22" y1="6" x2="22" y2="6"/><line x1="-22" y1="14" x2="22" y2="14"/><line x1="-22" y1="22" x2="22" y2="22"/>
+      </g>
+      <path d="M0 8 C0 -4 -17 -6 -17 7 C-17 19 -3 25 0 30 C3 25 17 19 17 7 C17 -6 0 -4 0 8 Z" fill="none" stroke="#FFF8F0" stroke-width="3"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- open/closed (idle-time) banner — shown at the very top when Marie pauses ordering -->
+<div id="closedBanner" class="closed-banner" hidden></div>
+
+<!-- hero background: two stacked videos crossfaded into a seamless endless loop -->
+<video id="bgVideo" class="bgv" autoplay muted playsinline preload="auto" fetchpriority="high" poster="assets/img/hero-poster.jpg"><source src="assets/video/hero.mp4" type="video/mp4" /></video>
+<video id="bgVideo2" class="bgv" muted playsinline preload="auto" poster="assets/img/hero-poster.jpg"><source src="assets/video/hero.mp4" type="video/mp4" /></video>
+<div id="bg-wm-mask" aria-hidden="true"></div>
+<div id="bg-vignette"></div>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand"><span class="logo-glass"><svg class="logo-badge"><use href="#lgmLogo"/></svg></span><span class="wordmark">Les Gaufres de Marie</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav id="navMenu">
+    <a class="link" href="#menu" data-i18n="nav.menu">Le Menu</a>
+    <a class="link" href="#about" data-i18n="nav.about">L'Histoire</a>
+    <a class="link" href="#truck" data-i18n="nav.truck">Le Food Truck</a>
+    <a class="link" href="#events" data-i18n="book.kicker">Événements</a>
+    <div class="nav-actions">
+      <button class="icon-btn lang-btn" id="langBtn">EN</button>
+      <div id="notifMount"></div>
+      <a class="icon-btn" id="accountBtn" href="account.html" title="Compte">👤<span id="accBadgeNav" style="position:absolute;top:-6px;right:-6px;font-size:.8rem"></span></a>
+      <button class="icon-btn" id="cartBtn" title="Panier">🛒<span class="cart-count" id="cartCount">0</span></button>
+      <a class="nav-cta" id="signInBtn" href="account.html" data-i18n="nav.signin">Se connecter</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <svg class="hero-logo"><use href="#lgmLogo"/></svg>
+      <span class="eyebrow" data-i18n="hero.eyebrow"></span>
+      <h1><span data-i18n="hero.title1"></span><br><span data-i18n="hero.title2"></span> <em data-i18n="hero.titleEm"></em></h1>
+      <p class="tag" data-i18n="hero.tag"></p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary" data-i18n="hero.cta1"></a>
+        <a href="#truck" class="btn btn-ghost" data-i18n="hero.cta2"></a>
+      </div>
+      <div class="scroll-hint"><div class="dot"></div>SCROLL</div>
+    </div>
+  </section>
+
+  <!-- menu -->
+  <section class="menu section-pad" id="menu">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="menu.kicker"></span>
+        <h2 data-i18n="menu.title"></h2>
+        <p data-i18n="menu.sub"></p>
+      </div>
+      <div class="cat-tabs" id="catTabs"></div>
+      <div id="menuWrap"></div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section class="about section-pad" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <span class="kicker" data-i18n="about.kicker"></span>
+          <h2 data-i18n="about.title"></h2>
+          <p class="lead" data-i18n="about.lead"></p>
+          <p data-i18n="about.p1"></p>
+          <p data-i18n="about.p2"></p>
+          <div class="about-stats">
+            <div class="stat"><div class="n" data-i18n="about.stat1"></div><div class="l" data-i18n="about.stat1l"></div></div>
+            <div class="stat"><div class="n" data-i18n="about.stat2"></div><div class="l" data-i18n="about.stat2l"></div></div>
+            <div class="stat"><div class="n" data-i18n="about.stat3"></div><div class="l" data-i18n="about.stat3l"></div></div>
+          </div>
+          <div class="follow-bar">
+            <a class="fpill fpill-ig" id="fpIg" target="_blank" rel="noopener" aria-label="Instagram">
+              <span class="fp-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-.7a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg></span>
+              <span class="fp-txt"><b>1 832</b><small data-i18n="social.followers"></small></span>
+            </a>
+            <a class="fpill fpill-tk" id="fpTk" target="_blank" rel="noopener" aria-label="TikTok">
+              <span class="fp-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.2v12.86a2.58 2.58 0 0 1-2.58 2.4 2.58 2.58 0 0 1-2.35-3.64 2.58 2.58 0 0 1 3.28-1.38V9.9a5.86 5.86 0 0 0-1-.08 5.86 5.86 0 1 0 5.86 5.86V8.9a7.5 7.5 0 0 0 4.4 1.4V7.1a4.28 4.28 0 0 1-2.35-1.28Z"/></svg></span>
+              <span class="fp-txt"><b>3 267</b><small data-i18n="social.followers"></small></span>
+            </a>
+          </div>
+        </div>
+        <div class="about-visual reveal" aria-hidden="true">
+          <div class="rings"><span style="width:96%;height:96%"></span><span style="width:74%;height:74%"></span><span style="width:52%;height:52%"></span></div>
+          <svg class="logo-big"><use href="#lgmLogo"/></svg>
+          <div class="float-chip c1">🍫 Fait maison</div>
+          <div class="float-chip c2">🧇 Cuite minute</div>
+          <div class="float-chip c3">📍 Abidjan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- highlights / Marie's news -->
+  <section class="highlights section-pad" id="highlights">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="hl.kicker"></span>
+        <h2 id="hlTitle" data-i18n="hl.title"></h2>
+        <p data-i18n="hl.sub"></p>
+      </div>
+      <div class="hl-grid reveal" id="highlightsGrid"></div>
+    </div>
+  </section>
+
+  <!-- truck -->
+  <section class="truck-sec section-pad" id="truck">
+    <svg class="drip-top" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#FBF1DC" d="M0 0 H1200 V18 C1160 18 1150 40 1120 40 C1095 40 1090 14 1060 14 C1030 14 1028 34 1000 34 C972 34 968 12 940 12 C910 12 908 38 878 38 C850 38 846 16 818 16 C788 16 786 36 756 36 C728 36 724 14 696 14 C666 14 664 40 634 40 C606 40 602 16 574 16 C544 16 542 34 512 34 C484 34 480 12 452 12 C422 12 420 38 390 38 C362 38 358 16 330 16 C300 16 298 36 268 36 C240 36 236 14 208 14 C178 14 176 40 146 40 C118 40 114 16 86 16 C56 16 54 34 24 34 C12 34 6 24 0 22 Z"/>
+    </svg>
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="truck.kicker"></span>
+        <h2 data-i18n="truck.title"></h2>
+        <p data-i18n="truck.sub"></p>
+      </div>
+      <div class="truck-stage reveal">
+        <canvas id="truck-canvas"></canvas>
+        <!-- static fallback shown on low-end devices (no heavy 3D) -->
+        <div id="truck-fallback" class="truck-fallback">
+          <svg viewBox="0 0 600 340" class="truck-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le food truck Les Gaufres de Marie">
+            <defs><linearGradient id="tbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF1DC"/><stop offset="1" stop-color="#EFDCBA"/></linearGradient></defs>
+            <ellipse cx="300" cy="300" rx="240" ry="20" fill="rgba(120,40,10,.16)"/>
+            <rect x="64" y="116" width="392" height="150" rx="26" fill="url(#tbody)" stroke="#E3CFA6" stroke-width="2"/>
+            <path d="M456 150 h66 q20 0 28 20 l16 44 q5 14 -10 14 h-100 z" fill="url(#tbody)" stroke="#E3CFA6" stroke-width="2"/>
+            <rect x="462" y="160" width="58" height="44" rx="8" fill="#22343d"/>
+            <circle cx="544" cy="232" r="9" fill="#fff4d6" stroke="#d9b06a" stroke-width="2"/>
+            <g fill="#E89A5C"><rect x="78" y="116" width="20" height="30" rx="10"/><rect x="120" y="116" width="20" height="40" rx="10"/><rect x="162" y="116" width="20" height="28" rx="10"/><rect x="204" y="116" width="20" height="38" rx="10"/><rect x="246" y="116" width="20" height="30" rx="10"/><rect x="288" y="116" width="20" height="40" rx="10"/><rect x="330" y="116" width="20" height="28" rx="10"/><rect x="372" y="116" width="20" height="36" rx="10"/><rect x="414" y="116" width="20" height="28" rx="10"/></g>
+            <path d="M96 150 h214 l-16 -30 h-182 z" fill="#E89A5C"/>
+            <g fill="#FBF1DC"><path d="M96 150 h28 l-12 -30 h-26 z" opacity=".0"/></g>
+            <rect x="118" y="152" width="174" height="78" rx="10" fill="#2a1c12"/>
+            <rect x="126" y="160" width="158" height="62" rx="8" fill="#ffe6b8"/>
+            <rect x="108" y="226" width="196" height="13" rx="5" fill="#E3CFA6"/>
+            <circle cx="350" cy="172" r="9" fill="#E8546A"/><circle cx="398" cy="196" r="9" fill="#E8546A"/><circle cx="332" cy="226" r="9" fill="#E8546A"/>
+            <g transform="translate(330 150) scale(.34)"><use href="#lgmLogo" width="220" height="220"/></g>
+            <g><circle cx="172" cy="278" r="34" fill="#1a1512"/><circle cx="172" cy="278" r="15" fill="#cfae6a"/><circle cx="172" cy="278" r="5" fill="#8a6a2a"/><circle cx="404" cy="278" r="34" fill="#1a1512"/><circle cx="404" cy="278" r="15" fill="#cfae6a"/><circle cx="404" cy="278" r="5" fill="#8a6a2a"/></g>
+          </svg>
+        </div>
+      </div>
+      <div class="truck-loc reveal" id="truckLoc"></div>
+      <div class="truck-updated" id="truckUpdated"></div>
+    </div>
+  </section>
+
+  <!-- events / booking -->
+  <section class="section-pad" id="events" style="background:var(--cream)">
+    <div class="container">
+      <div class="sec-head reveal" style="margin-bottom:24px">
+        <span class="kicker" data-i18n="book.kicker"></span>
+        <h2 data-i18n="book.title"></h2>
+        <p data-i18n="book.sub"></p>
+      </div>
+      <div class="reveal" style="text-align:center"><button class="btn btn-coral" id="bookBtn" data-i18n="book.cta"></button></div>
+    </div>
+  </section>
+
+  <!-- order -->
+  <section class="order section-pad" id="order">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="order.kicker"></span>
+        <h2 data-i18n="order.title"></h2>
+        <p data-i18n="order.sub"></p>
+      </div>
+      <div class="order-grid">
+        <div class="order-info reveal">
+          <h3>👋 Abidjan</h3>
+          <a class="line maps-link" href="https://www.google.com/maps/search/?api=1&query=Temple%20du%20Foot%20Vallon%20Abidjan" target="_blank" rel="noopener"><div class="ic">📍</div><div class="t"><b>Temple du Foot, Vallon</b><span>07 05 75 24 27</span></div><span class="line-go" aria-hidden="true">↗</span></a>
+          <a class="line maps-link" href="https://www.google.com/maps/search/?api=1&query=L%27Atelier%20%C3%89pic%C3%A9%20Mermoz%20Abidjan" target="_blank" rel="noopener"><div class="ic">📍</div><div class="t"><b>L'Atelier Épicé, Mermoz</b><span>07 03 82 27 00</span></div><span class="line-go" aria-hidden="true">↗</span></a>
+          <div class="line"><div class="ic">🕒</div><div class="t"><b>Lundi au dimanche</b><span>11h00 à 18h00</span></div></div>
+          <div class="line"><div class="ic">🚕</div><div class="t"><b>Livraison</b><span>À votre adresse</span></div></div>
+          <div class="order-socials" id="orderSocials"></div>
+        </div>
+        <div class="order-cart reveal">
+          <h3>🛒 <span data-i18n="cart.title"></span></h3>
+          <div class="cart-lines" id="cartLines"></div>
+          <div class="cart-totals" id="cartTotals"></div>
+          <button class="btn btn-coral btn-block" id="checkoutBtn" data-i18n="cart.checkout"></button>
+          <button class="btn btn-ghost btn-block" id="clearCartBtn" data-i18n="cart.clear" style="margin-top:10px;color:var(--cream);border-color:rgba(255,248,240,.3)"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <svg class="logo-badge" style="width:56px;height:56px;flex-basis:56px"><use href="#lgmLogo"/></svg>
+      <div><div class="wordmark">Les Gaufres de Marie</div><div class="sub" data-i18n="foot.sub"></div></div>
+    </div>
+  </div>
+  <div class="copyright">© <span id="year">2026</span> Les Gaufres de Marie · <span data-i18n="foot.rights"></span> · <a href="#" id="demoReset" class="demo-reset">↻ reset demo</a></div>
+</footer>
+
+<!-- Demo badge / lead CTA (set your marketplace product URL below) -->
+<a id="demoBadge" class="demo-badge" href="#" target="_blank" rel="noopener">
+  <span class="demo-dot"></span>
+  <span><b>DÉMO</b><span class="demo-cta" data-i18n-html="demo.cta"> · Je veux ce site pour mon business →</span></span>
+</a>
+
+<!-- ===== Slide-out cart + checkout drawer ===== -->
+<div class="drawer-backdrop" id="cartDrawer">
+  <aside class="drawer" role="dialog" aria-modal="true">
+    <div class="drawer-head"><h3 id="drawerTitle" class="serif">Votre commande</h3><button class="drawer-close" id="drawerClose">✕</button></div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </aside>
+</div>
+
+<!-- ===== Booking / quote modal ===== -->
+<div class="modal-backdrop" id="bookingModal">
+  <div class="modal wide">
+    <div class="modal-head"><h3 data-i18n="book.title"></h3><button class="modal-close">✕</button></div>
+    <div class="modal-body" id="bookingBody"></div>
+  </div>
+</div>
+
+<!-- ===== AI chatbot ===== -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel">
+    <div class="chat-head">
+      <svg class="ch-logo"><use href="#lgmLogo"/></svg>
+      <div style="flex:1"><b id="chatTitleTxt">Assistant Marie</b><div class="ch-status">● en ligne</div></div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="chat-input-row">
+      <input id="chatInput" type="text" />
+      <button id="chatSend">➤</button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chatToggle" aria-label="Chat">💬</button>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/notif.js"></script>
+<script src="assets/js/dishart.js"></script>
+<script src="assets/js/app.js"></script>
+<script type="module" src="assets/js/scene.js"></script>
+<script>
+  // inject socials (depends on LGM data)
+  (function () {
+    const s = LGM.business.socials;
+    const ig = `<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2Zm5.1-.7a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg>`;
+    const tk = `<svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.2v12.86a2.58 2.58 0 0 1-2.58 2.4 2.58 2.58 0 0 1-2.35-3.64 2.58 2.58 0 0 1 3.28-1.38V9.9a5.86 5.86 0 0 0-1-.08 5.86 5.86 0 1 0 5.86 5.86V8.9a7.5 7.5 0 0 0 4.4 1.4V7.1a4.28 4.28 0 0 1-2.35-1.28Z"/></svg>`;
+    const wa = `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l.9 3.1-3.2-.8A8.2 8.2 0 1 1 12 3.8Zm-3 3.8c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.3s1 2.7 1.2 2.9c.2.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.6-1.6-.9-2.2-.2-.5-.4-.4-.6-.4h-.5Z"/></svg>`;
+    const gl = `<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>`;
+    const html = `<a href="${s.instagram}" target="_blank" aria-label="Instagram">${ig}</a><a href="${s.tiktok}" target="_blank" aria-label="TikTok">${tk}</a><a href="${s.whatsapp}" target="_blank" aria-label="WhatsApp">${wa}</a><a href="${s.yango || "https://yango-delivery.com"}" target="_blank" aria-label="Livraison">${gl}</a>`;
+    const os = document.getElementById("orderSocials"); if (os) os.innerHTML = html;
+    // wire the follower pills to the live social links
+    const fpIg = document.getElementById("fpIg"); if (fpIg) fpIg.href = s.instagram || "#";
+    const fpTk = document.getElementById("fpTk"); if (fpTk) fpTk.href = s.tiktok || "#";
+
+    // ---- Demo showcase: set this to your marketplace product page ----
+    const MARKETPLACE_URL = window.LGM_MARKETPLACE_URL || "#"; // ← replace with your store's product URL
+    const badge = document.getElementById("demoBadge");
+    if (badge) { badge.href = MARKETPLACE_URL; if (MARKETPLACE_URL === "#") badge.removeAttribute("target"); }
+    // seamless endless hero loop via crossfade between two stacked videos
+    (function () {
+      const A = document.getElementById("bgVideo"), B = document.getElementById("bgVideo2");
+      if (!A || !B) return;
+      const FADE = 0.7; let active = A, idle = B;
+      const play = v => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+      play(A);
+      function tick() {
+        const v = active;
+        if (v.duration && v.currentTime >= v.duration - FADE) {
+          idle.currentTime = 0; play(idle);
+          idle.style.opacity = 1; active.style.opacity = 0;
+          const tmp = active; active = idle; idle = tmp;
+        }
+      }
+      A.addEventListener("timeupdate", () => { if (active === A) tick(); });
+      B.addEventListener("timeupdate", () => { if (active === B) tick(); });
+      A.addEventListener("canplay", () => play(A));
+      ["click", "touchstart", "scroll"].forEach(ev => window.addEventListener(ev, () => play(active), { passive: true }));
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) play(active); });
+    })();
+
+    const reset = document.getElementById("demoReset");
+    if (reset) reset.addEventListener("click", e => {
+      e.preventDefault();
+      Object.keys(localStorage).filter(k => k.startsWith("lgm_")).forEach(k => localStorage.removeItem(k));
+      location.reload();
+    });
+  })();
+</script>
+</body>
+</html>
